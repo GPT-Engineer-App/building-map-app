@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { Box, Text, VStack, Card, CardBody } from "@chakra-ui/react";
+import { Box, Text, VStack, Card, CardBody, HStack, Icon } from "@chakra-ui/react";
+import { FaTemperatureHigh, FaTint, FaUserFriends } from "react-icons/fa";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -54,13 +55,22 @@ const Index = () => {
         ))}
       </MapContainer>
       {selectedBuilding && (
-        <Card position="absolute" top="10" left="10" width="300px" zIndex="1000">
+        <Card position="absolute" top="10" left="10" width="300px" zIndex="1000" boxShadow="xl" borderRadius="md" overflow="hidden">
           <CardBody>
             <VStack spacing={4}>
-              <Text fontSize="xl" fontWeight="bold">{selectedBuilding.name}</Text>
-              <Text>Temperature: {selectedBuilding.sensors.temperature} °C</Text>
-              <Text>Humidity: {selectedBuilding.sensors.humidity} %</Text>
-              <Text>Occupancy: {selectedBuilding.sensors.occupancy} people</Text>
+              <Text fontSize="2xl" fontWeight="bold" color="teal.500">{selectedBuilding.name}</Text>
+              <HStack>
+                <Icon as={FaTemperatureHigh} color="red.500" />
+                <Text>Temperature: {selectedBuilding.sensors.temperature} °C</Text>
+              </HStack>
+              <HStack>
+                <Icon as={FaTint} color="blue.500" />
+                <Text>Humidity: {selectedBuilding.sensors.humidity} %</Text>
+              </HStack>
+              <HStack>
+                <Icon as={FaUserFriends} color="green.500" />
+                <Text>Occupancy: {selectedBuilding.sensors.occupancy} people</Text>
+              </HStack>
             </VStack>
           </CardBody>
         </Card>
